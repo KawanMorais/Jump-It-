@@ -18,8 +18,14 @@ class Game:
             menu_return = menu.run()
 
             if menu_return == MENU_OPTION[0]:
-                level = Level(self.window, 'level1')
-                level_return = level.run()
+                while True:
+                    level = Level(self.window, 'level1')
+                    level_return = level.run()
+
+                    if level_return == "restart":
+                        continue
+                    else:
+                        break
             elif menu_return == MENU_OPTION[2]:
                 pygame.quit()
                 quit()

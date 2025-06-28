@@ -3,7 +3,7 @@ COLOR_ORANGE = (255,128,0)
 C_WHITE = (255, 255, 255)
 C_YELLOW = (255, 255, 128)
 
-# E
+
 #E
 ENTITY_SPEED = {
     'Level1Bg0': 0,
@@ -14,6 +14,11 @@ ENTITY_SPEED = {
     'Level1Bg5': 5,
     'Level1Bg6': 6,
 }
+
+ENTITY_SPEED_OBSTACLE = 6
+
+# G
+GROUND_Y = 250
 
 # M
 MENU_OPTION = ('NEW GAME',
