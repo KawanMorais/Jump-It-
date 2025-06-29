@@ -32,6 +32,10 @@ class Level:
 
         self.game_over = False
 
+        # SCORE
+        self.score = 0
+        self.start_time = pygame.time.get_ticks()  # Registra o tempo de início do jogo
+
     def run(self):
         pygame.mixer_music.load(f'asset/Menu.mp3')
         pygame.mixer_music.play(-1)
@@ -40,7 +44,12 @@ class Level:
 
         while True:
             if self.game_over:
-                self.level_text(30, "GAME OVER!", (255, 0, 0), (WIN_WIDTH / 2 - 80, WIN_HEIGHT / 2 - 10))
+                self.window.fill((0, 0, 0))
+
+
+                self.level_text(30, "GAME OVER!", (255, 0, 0), (WIN_WIDTH / 2 - 90, WIN_HEIGHT / 2 - 20))
+                self.level_text(20, f"Score: {self.score}", C_WHITE, (WIN_WIDTH / 2 - 60, WIN_HEIGHT / 2 + 35))
+                self.level_text(18, "Pressione ENTER para REINICIAR ou ESC para o MENU", C_WHITE,(WIN_WIDTH / 2 - 280, WIN_HEIGHT / 2 + 70))
                 pygame.display.flip()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -50,11 +59,15 @@ class Level:
                         if event.key == pygame.K_RETURN:
                             pygame.mixer_music.play(-1)
                             return "restart"
+                        elif event.key == pygame.K_ESCAPE:
+                            return "menu"
                 continue
 
 
             clock.tick(60)
             current_time = pygame.time.get_ticks()
+
+            self.score = (current_time - self.start_time) // 100
 
             # --- Geração de Obstáculos ---
             if current_time - self.last_spawn_time >= self.obstacle_spawn_time:
@@ -100,6 +113,7 @@ class Level:
                                 break
 
             self.level_text(14, f'"{self.name}"', C_WHITE, (10, 5))
+            self.level_text(14, f'Score: {self.score}', C_WHITE, (10, 25))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE, (10, WIN_HEIGHT - 20))
 

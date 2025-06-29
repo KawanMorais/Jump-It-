@@ -25,6 +25,9 @@ MENU_OPTION = ('NEW GAME',
                'SCORE',
                'EXIT')
 
+# S
+SCORE_FILE = 'highscore.txt'
+
 #  W
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
